@@ -22,6 +22,10 @@ function CustomToolbar() {
   const page = gridPageSelector(apiRef); // current page
   const gridPageSizeSelector1 = gridPageSizeSelector(apiRef); // current pageSize
   const gridPaginationRowRangeSelector1 = gridPaginationRowRangeSelector(apiRef); // {firstRowIndex: 0, lastRowIndex: 9}
+
+  const firstRowIndex = gridPaginationRowRangeSelector1 ? gridPaginationRowRangeSelector1.firstRowIndex + 1 : 0;
+  const secondRowIndex = gridPaginationRowRangeSelector1 ? gridPaginationRowRangeSelector1.lastRowIndex + 1 : 0;
+
   // eslint-disable-next-line
   const gridPaginationModelSelector1 = gridPaginationModelSelector(apiRef); // {page: 0, pageSize: 25}
   // eslint-disable-next-line
@@ -48,19 +52,11 @@ function CustomToolbar() {
     apiRef.current.setPageSize(e.target.value);
   }
 
-
   return (
-    <GridToolbarContainer>
-      <Button onClick={firstPage}>firstPage</Button>
-      <Button onClick={backPage}>backPage</Button>
-      <Button onClick={nextPage}>nextPage</Button>
-      <Button onClick={lastPage}>lastPage</Button>
-      <Typography variant="body1" color="initial">{gridPaginationRowRangeSelector1 ? gridPaginationRowRangeSelector1.firstRowIndex + 1 : 0} - {gridPaginationRowRangeSelector1 ? gridPaginationRowRangeSelector1.lastRowIndex + 1 : 0} to {totalRows}</Typography>
+    <GridToolbarContainer sx={{ display: "flex", gap: "8px" }}>
+      <Typography variant="body1" color="initial">Rows per page: {firstRowIndex} - {secondRowIndex} to {totalRows}</Typography>
       <FormControl size="small">
         <Select
-          labelId="page-size-select-label"
-          id="page-size-select"
-          aria-label="change page size"
           value={gridPageSizeSelector1}
           onChange={handleSelectDropdown}
           displayEmpty
@@ -70,6 +66,10 @@ function CustomToolbar() {
           <MenuItem value={50} aria-label="select 100">50</MenuItem>
         </Select>
       </FormControl>
+      <Button onClick={firstPage}>firstPage</Button>
+      <Button onClick={backPage}>backPage</Button>
+      <Button onClick={nextPage}>nextPage</Button>
+      <Button onClick={lastPage}>lastPage</Button>
     </GridToolbarContainer>
   );
 }
