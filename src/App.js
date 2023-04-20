@@ -66,10 +66,10 @@ function CustomToolbar() {
           <MenuItem value={50} aria-label="select 100">50</MenuItem>
         </Select>
       </FormControl>
-      <Button onClick={firstPage}>firstPage</Button>
-      <Button onClick={backPage}>backPage</Button>
-      <Button onClick={nextPage}>nextPage</Button>
-      <Button onClick={lastPage}>lastPage</Button>
+      <Button onClick={firstPage} disabled={page === 0}>firstPage</Button>
+      <Button onClick={backPage} disabled={page === 0}>backPage</Button>
+      <Button onClick={nextPage} disabled={page === pageCount - 1}>nextPage</Button>
+      <Button onClick={lastPage} disabled={page === pageCount - 1}>lastPage</Button>
     </GridToolbarContainer>
   );
 }
